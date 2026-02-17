@@ -11,7 +11,7 @@ jobs:
   cmake:
     # Skip building pull requests from the same repository
     if: ${{ github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name != github.repository }}
-    runs-on: windows-latest
+    runs-on: windows-latest-r
     strategy:
       fail-fast: false
       matrix:
@@ -45,7 +45,7 @@ jobs:
   docs:
     # Skip building pull requests from the same repository
     if: ${{ github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name != github.repository }}
-    runs-on: windows-latest
+    runs-on: windows-latest-r
     steps:
       - name: Checkout
         uses: actions/checkout@v5
@@ -67,7 +67,7 @@ jobs:
 
   package:
     needs: [cmake, docs]
-    runs-on: windows-latest
+    runs-on: windows-latest-r
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -132,3 +132,4 @@ jobs:
           if-no-files-found: error
           include-hidden-files: true
           compression-level: 9
+
